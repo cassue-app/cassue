@@ -22,5 +22,6 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn tsc
       - run: yarn next lint
+      - run: npx knip --reporter=./bin/knip-reporter.ts
       # - run: yarn test
       # - run: yarn build

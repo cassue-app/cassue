@@ -26,7 +26,7 @@
     "**/*.ts",
     "**/*.tsx",
     "src/services/github/client"
-  ],
+, "bin/knip-reporter.js"  ],
   "exclude": [
     "node_modules"
   ]
