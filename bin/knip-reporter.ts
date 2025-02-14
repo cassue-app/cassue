@@ -2,7 +2,7 @@
 import type { Reporter } from 'knip'
 import { IssueRecords } from 'knip/dist/types/issues'
 
-// https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/workflow-commands-for-github-actions#setting-a-warning-message
+// https://github.com/webpro-nl/knip/blob/f63df95f0436055ca49155d2234cd8f63aed34cd/packages/knip/src/constants.ts#L194-L210
 export const ISSUE_TYPE_TITLE: Record<string, string> = {
   files: 'Unused files',
   _files: 'Unused files',
@@ -21,6 +21,7 @@ export const ISSUE_TYPE_TITLE: Record<string, string> = {
   duplicates: 'Duplicate exports',
 }
 
+// https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/workflow-commands-for-github-actions#setting-a-warning-message
 const parseFileIssue = (value: Set<string>) => {
   const message = ISSUE_TYPE_TITLE["files"]
   return Array.from(value.values()).map(file => {
@@ -38,10 +39,10 @@ const parseIssueRecords = (type: string, value: IssueRecords) => {
   const warnings = values.map(({ file, target, value }) => {
     if (value.symbols) {
       return value.symbols.map(symbol => {
-        return `::warning file=${file},title=${title},line=${symbol.line},col=${symbol.col}::${target}/${symbol.symbol}`
+        return `::warning file=${file},title=${title},line=${symbol.line},col=${symbol.col}::${symbol.symbol}`
       })
     }
-    return `::warning file=${file},title=${title},line=${value.line},col=${value.col}::${target}/${value.symbol}`
+    return `::warning file=${file},title=${title},line=${value.line},col=${value.col}::${value.symbol}`
   }).flat(1)
   return warnings
 }
