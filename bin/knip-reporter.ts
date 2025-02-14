@@ -47,7 +47,6 @@ const parseIssueRecords = (type: string, value: IssueRecords) => {
 
 const reporter: Reporter = function (options) {
 
-  console.log(options.issues.files)
   const record = Object.entries(options.issues).map(([key, value]) => {
     switch (key) {
       case "files":
