@@ -55,8 +55,8 @@ const reporter: Reporter = function (options) {
   }).flat(1)
   const warnings = [...fileWarnings, ...recordWarnings]
     .filter(warn => (warn && warn?.length > 0))
-
-  console.log(warnings.join("\n"))
+    .map(c => console.log(c))
+  // console.log(warnings.join("\n"))
 }
 
 export default reporter
