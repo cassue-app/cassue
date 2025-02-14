@@ -23,7 +23,7 @@ export const ISSUE_TYPE_TITLE: Record<string, string> = {
 const parseFileIssue = (value: Set<string>) => {
   const message = ISSUE_TYPE_TITLE["files"]
   return Array.from(value.values()).map(file => {
-    return `::warning file=${file}::${message}`
+    return `::warning file=${file},title=${message}`
   }).join("\n")
 
 }
