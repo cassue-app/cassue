@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: 18
           cache: yarn
-      - run: yarn install --frozen-lockfile
+      - run: yarn install --frozen-lockfile --ignore-engines
       - run: yarn tsc
       - run: yarn next lint
       - run: npx knip --reporter=./bin/knip-reporter.ts
