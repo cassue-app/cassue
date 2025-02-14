@@ -38,11 +38,13 @@ const parseIssueRecords = (type: string, value: IssueRecords) => {
 
   const warnings = values.map(({ file, target, value }) => {
     if (value.symbols) {
-      return value.symbols.map(symbol => {
-        return `::warning file=${file},title=${title},line=${symbol.line},col=${symbol.col}::${symbol.symbol}`
-      })
+      const symbol = value.symbols[0]
+      return `::warning file=${file},title=${title},line=${symbol.line},col=${symbol.col}::${target}`
+      // return value.symbols.map(symbol => {
+      //   return `::warning file=${file},title=${title},line=${symbol.line},col=${symbol.col}::${symbol.symbol}`
+      // })
     }
-    return `::warning file=${file},title=${title},line=${value.line},col=${value.col}::${value.symbol}`
+    return `::warning file=${file},title=${title},line=${value.line},col=${value.col}::${target}`
   }).flat(1)
   return warnings
 }
