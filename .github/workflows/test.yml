@@ -20,7 +20,7 @@ jobs:
           node-version: 18
           cache: yarn
       - run: yarn install --frozen-lockfile --ignore-engines
-      - run: npx knip --reporter=./bin/knip-reporter.ts --no-exit-code --no-progress
+      - run: npx knip --reporter=markdown --no-exit-code --no-progress > $GITHUB_STEP_SUMMARY
       # - run: yarn tsc
       # - run: yarn next lint
       # - run: yarn test
