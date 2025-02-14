@@ -28,7 +28,7 @@ const parseFileIssue = (value: Set<string>) => {
   })
 }
 const parseIssueRecords = (type: string, value: IssueRecords) => {
-  const title = `[knip]${ISSUE_TYPE_TITLE[type]}`
+  const title = `[knip] ${ISSUE_TYPE_TITLE[type]}`
   return Object.entries(value).map(([file, v]) => {
     return Object.entries(v).map(([target, value]) => {
       if (value.symbols) {
@@ -36,7 +36,7 @@ const parseIssueRecords = (type: string, value: IssueRecords) => {
           return `::warning file=${file},title=${title},line=${symbol.line},col=${symbol.col}::${target}/${symbol.symbol}`
         })
       }
-      return `::warning file=${file},title=${title},line=${value.line},col=${value.col}::${target}`
+      return `::warning file=${file},title=${title},line=${value.line},col=${value.col}::${target}/${value.symbol}`
     })
     // console.log(message, { k, v })
     // return `::warning file=${file},title=${message}`
