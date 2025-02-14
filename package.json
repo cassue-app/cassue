@@ -23,6 +23,7 @@
     "@emotion/styled": "^11.11.0",
     "@next/bundle-analyzer": "^13.4.9",
     "@primer/octicons-react": "^17.12.0",
+    "@tanstack/react-query": "4",
     "@trpc/client": "10.34.0",
     "@trpc/next": "10.34.0",
     "@trpc/server": "10.34.0",
@@ -37,7 +38,6 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.1",
     "react-icons": "^4.10.1",
-    "@tanstack/react-query": "4",
     "recoil": "^0.7.7",
     "slate": "^0.94.1",
     "slate-react": "^0.94.2",
@@ -53,6 +53,7 @@
     "@types/react": "^18.2.14",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.9",
+    "knip": "^5.44.1",
     "size-limit": "^8.2.6",
     "typescript": "^4.9.5"
   }
