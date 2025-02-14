@@ -33,7 +33,7 @@ const parseIssueRecords = (type: string, value: IssueRecords) => {
     return Object.entries(v).map(([target, value]) => {
       if (value.symbols) {
         return value.symbols.map(symbol => {
-          return `::warning file=${file},title=${message},line=${symbol.line},col=${symbol.col}::${symbol.symbol}`
+          return `::warning file=${file},title=${message},line=${symbol.line},col=${symbol.col}::${target}/${symbol.symbol}`
         })
       }
       if (value.col) {
