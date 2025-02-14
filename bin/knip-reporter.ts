@@ -56,27 +56,6 @@ const reporter: Reporter = function (options) {
   }).flat(10).filter(record => record && record?.length > 0)
 
   console.log(record.join("\n"))
-  // options.issues.files
-
-  // console.log(options.counters)
 }
 
 export default reporter
-
-
-// const { Reporter } = require('knip')
-
-// const reporter = function (options) {
-//   console.log(options.issues)
-//   console.log(options.counters)
-// }
-
-// exports.modules = reporter
-
-// const input = JSON.parse(process.argv[2])
-
-// const summary = input.issues?.map(issue => {
-//   const {} = issue
-//   return `::warning file=${issue.file},line=${issue.line},col=${issue.column}::${issue.message}`
-//   console.log(JSON.stringify(issue, null, 2))
-// })
