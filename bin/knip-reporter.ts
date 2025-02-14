@@ -29,33 +29,33 @@ const parseFileIssue = (value: Set<string>) => {
 }
 const parseIssueRecords = (type: string, value: IssueRecords) => {
   const title = `[knip] ${ISSUE_TYPE_TITLE[type]}`
-  return Object.entries(value).map(([file, v]) => {
+  const values = Object.entries(value).map(([file, v]) => {
     return Object.entries(v).map(([target, value]) => {
-      if (value.symbols) {
-        return value.symbols.map(symbol => {
-          return `::warning file=${file},title=${title},line=${symbol.line},col=${symbol.col}::${target}/${symbol.symbol}`
-        })
-      }
-      return `::warning file=${file},title=${title},line=${value.line},col=${value.col}::${target}/${value.symbol}`
+      return { file, target, value }
     })
-    // console.log(message, { k, v })
-    // return `::warning file=${file},title=${message}`
-  })
+  }).flat(1)
+
+  const warnings = values.map(({ file, target, value }) => {
+    if (value.symbols) {
+      return value.symbols.map(symbol => {
+        return `::warning file=${file},title=${title},line=${symbol.line},col=${symbol.col}::${target}/${symbol.symbol}`
+      })
+    }
+    return `::warning file=${file},title=${title},line=${value.line},col=${value.col}::${target}/${value.symbol}`
+  }).flat(1)
+  return warnings
 }
 
 const reporter: Reporter = function (options) {
+  const { files, _files, ...records } = options.issues
+  const fileWarnings = parseFileIssue(files)
+  const recordWarnings = Object.entries(records).map(([key, value]) => {
+    return parseIssueRecords(key, value as IssueRecords)
+  }).flat(1)
+  const warnings = [...fileWarnings, ...recordWarnings]
+    .filter(warn => (warn && warn?.length > 0))
 
-  const record = Object.entries(options.issues).map(([key, value]) => {
-    switch (key) {
-      case "files":
-        return parseFileIssue(value as Set<string>)
-      default:
-        return parseIssueRecords(key, value as IssueRecords)
-    }
-    // console.log({ key, value })
-  }).flat(10).filter(record => record && record?.length > 0)
-
-  console.log(record.join("\n"))
+  console.log(warnings.join("\n"))
 }
 
 export default reporter
